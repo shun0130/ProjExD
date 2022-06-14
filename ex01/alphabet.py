@@ -30,7 +30,7 @@ def shutudai():
     return abs_char_lst
 
 def kaitou(seikai):
-    num = int(input("欠損文字は何でしょうか？"))
+    num = int(input("欠損文字はいくつでしょうか？"))
     if num == kesson:
         print("不正解です")
         return 0
@@ -43,7 +43,7 @@ def kaitou(seikai):
                 return 0
             seikai.remove(c)
         print("正解です。ゲームを終了します")  
-        return 2
+        return 1
         
 if __name__ == "__main__":
     main()

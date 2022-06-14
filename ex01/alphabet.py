@@ -1,9 +1,9 @@
 import random
 import datetime
 
-hyouji = 5
-taisyou = 10
-kesson = 2
+hyouji = 5 #最大繰り返し回数
+taisyou = 10 #対象文字数
+kesson = 2 #欠損文字数
 
 def main():
     st = datetime.datetime.now()
@@ -13,7 +13,7 @@ def main():
         if f == 1:
             break
     ed = datetime.datetime.now()
-    print(f"{(ed-st).seconds}秒かかりました")
+    print(f"所要時間は{(ed-st).seconds}秒かかりました")
 
 
 def shutudai():

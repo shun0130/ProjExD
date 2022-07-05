@@ -2,6 +2,7 @@ import pygame as pg
 import sys
 import random
 
+
 def main():
     clock  = pg.time.Clock()
     pg.display.set_caption("逃げろこうかとん")
@@ -16,14 +17,24 @@ def main():
     kkimg_rct = kkimg_sfc.get_rect()
     kkimg_rct.center = 900,400
 
-    #練習5:爆弾
+    #練習5:爆弾一個目
     bmimg_sfc = pg.Surface((20,20)) # Surface
     bmimg_sfc.set_colorkey((0,0,0))
-    pg.draw.circle(bmimg_sfc,(255,0,0),(10,10),10)
+    pg.draw.circle(bmimg_sfc,(255,0,0),(10,10),10) #爆弾１の色、座標、大きさの指定
     bmimg_rct = bmimg_sfc.get_rect()
-    bmimg_rct.centerx = random.randint(0,screen_rct.width)
-    bmimg_rct.centery = random.randint(0,screen_rct.height)
+    bmimg_rct.centerx = random.randint(0,screen_rct.width) #玉の跳ね返り方
+    bmimg_rct.centery = random.randint(0,screen_rct.height) #玉の跳ね返り方
     vx, vy = +1,+1
+
+    # 爆弾二個目
+    bmimg_sfc2 = pg.Surface((20,20)) # Surface2
+    bmimg_sfc2.set_colorkey((0,0,0))
+    pg.draw.circle(bmimg_sfc2,(0,0,255),(10,10),10) #爆弾２の色、座標、大きさの指定。
+    bmimg_rct2 = bmimg_sfc2.get_rect()
+    bmimg_rct2.centerx = random.randint(400,screen_rct.width) #玉の跳ね返り方
+    bmimg_rct2.centery = random.randint(200,screen_rct.height) # 玉の跳ね返り方
+    vx2, vy2 = +1,+1
+    
 
     #pg.display.update()
     clock.tick(0.5)
@@ -51,18 +62,28 @@ def main():
 
         #練習６ 
         bmimg_rct.move_ip(vx, vy)
+        bmimg_rct2.move_ip(vx2, vy2)
         #練習５
         screen_sfc.blit(bmimg_sfc, bmimg_rct)
+        screen_sfc.blit(bmimg_sfc2, bmimg_rct2)
         #練習７
         yoko, tate = check_bound(bmimg_rct, screen_rct)
         vx *= yoko
         vy *= tate
 
+        yoko, tate = check_bound2(bmimg_rct2, screen_rct)
+        vx2 *= yoko
+        vy2 *= tate
+
         if kkimg_rct.colliderect(bmimg_rct) == True: # こうかとんが爆弾にぶつかったら
+            print("Game Over!") # ターミナルに表示される。
+            return
+        if kkimg_rct.colliderect(bmimg_rct2) == True: # こうかとんが爆弾にぶつかったら
+            print("Game Over!") #ターミナルに表示される。
             return
 
         pg.display.update()
-        clock.tick(1000)
+        clock.tick(400)
 
 def check_bound(rct,scr_rct):
     '''
@@ -73,6 +94,13 @@ def check_bound(rct,scr_rct):
     yoko, tate = +1, +1 # 領域内
     if rct.left < scr_rct.left or scr_rct.right < rct.right: yoko = -1 #領域外
     if rct.top < scr_rct.top or scr_rct.bottom  < rct.bottom: tate = -1 #領域外
+    return yoko,tate
+
+def check_bound2(rct2,scr_rct2):
+
+    yoko, tate = +1, +1 # 領域内
+    if rct2.left < scr_rct2.left or scr_rct2.right < rct2.right: yoko = -1 #領域外
+    if rct2.top < scr_rct2.top or scr_rct2.bottom  < rct2.bottom: tate = -1 #領域外
     return yoko,tate
 
 

@@ -96,18 +96,18 @@ def main():
         bkd3.update(scr)
 
         if kkt.rct.colliderect(bkd1.rct):   # 爆弾一個目に当たったら爆発の効果音が流れるようにする
-            hoge = pg.mixer.Sound("sound/爆発2.mp3")
-            hoge.play()
+            hit = pg.mixer.Sound("sound/爆発2.mp3")
+            hit.play()
             return
 
         if kkt.rct.colliderect(bkd2.rct):   # 爆弾二個目に当たったら爆発の効果音が流れるようにする
-            hoge = pg.mixer.Sound("sound/爆発2.mp3")
-            hoge.play()
+            hit = pg.mixer.Sound("sound/爆発2.mp3")
+            hit.play()
             return
 
         if kkt.rct.colliderect(bkd3.rct):   # 爆弾三個目に当たったら爆発の効果音が流れるようにする
-            hoge = pg.mixer.Sound("sound/爆発2.mp3")
-            hoge.play()
+            hit = pg.mixer.Sound("sound/爆発2.mp3")
+            hit.play()
             return
 
         pg.display.update()
